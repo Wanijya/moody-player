@@ -1,0 +1,20 @@
+.mood-songs {
+  width: 100%;
+  padding: 4vw;
+  padding-top: 0;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.mood-songs h2 {
+  margin-bottom: 1vw;
+  font-size: 3vw;
+}
+
+.mood-songs .song {
+  margin: 0.5vw 0;
+  font-size: 1vw;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
