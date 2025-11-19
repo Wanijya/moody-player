@@ -1,0 +1,156 @@
+/* Main Container inside the Right Panel */
+.mood-songs-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card); /* Transparent glass feel */
+  color: var(--text-primary);
+}
+
+/* Header Area */
+.playlist-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: rgba(0,0,0,0.2); /* Slightly darker header */
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.playlist-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.song-count {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Scrollable List Area */
+.song-list-scroll {
+  flex: 1; /* Fills remaining height */
+  overflow-y: auto; /* Enable Scroll */
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Scrollbar Styling (Modern & Hidden unless needed) */
+.song-list-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.song-list-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.song-list-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Individual Song Row */
+.song-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.song-row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Active (Playing) State */
+.song-row.active {
+  background: rgba(250, 45, 72, 0.1); /* Subtle pink tint */
+  border: 1px solid rgba(250, 45, 72, 0.2);
+}
+
+.song-info-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Number / Equalizer Box */
+.song-index {
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.song-details h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.song-row.active .song-details h3 {
+  color: var(--primary-accent); /* Pink color for title when playing */
+}
+
+.song-details p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Play/Pause Icon */
+.action-btn i {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  opacity: 0; /* Hidden by default */
+  transform: scale(0.8);
+  transition: all 0.2s ease;
+}
+
+/* Show button on hover or if active */
+.song-row:hover .action-btn i,
+.song-row.active .action-btn i {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.song-row.active .action-btn i {
+  color: var(--primary-accent);
+}
+
+/* --- Equalizer Animation (Bars) --- */
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  height: 14px;
+  gap: 2px;
+}
+
+.equalizer span {
+  display: block;
+  width: 3px;
+  background-color: var(--primary-accent);
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.equalizer span:nth-child(1) { height: 40%; animation-delay: -0.4s; }
+.equalizer span:nth-child(2) { height: 100%; animation-delay: -0.2s; }
+.equalizer span:nth-child(3) { height: 60%; animation-delay: 0s; }
+
+@keyframes bounce {
+  0%, 100% { height: 20%; }
+  50% { height: 100%; }
+}

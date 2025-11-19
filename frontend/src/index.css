@@ -1,13 +1,28 @@
+:root {
+  --bg-dark: #050505; /* Deepest Black */
+  --bg-card: rgba(255, 255, 255, 0.03); /* Ultra subtle glass */
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --primary-accent: #fa2d48; /* Apple Music Pink/Red */
+  --text-primary: #ffffff;
+  --text-secondary: #86868b;
+  --radius-xl: 24px;
+  --radius-md: 16px;
+  --backdrop-blur: blur(40px);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-  background-color: #1b1b1b;
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  overflow: hidden; /* App-like feel, no window scroll */
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Global Scrollbar Styling */
+::-webkit-scrollbar { width: 0px; background: transparent; } /* Hidden scrollbar for cleaner look */
