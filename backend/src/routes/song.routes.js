@@ -7,30 +7,46 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.post("/songs", upload.single("audio"), async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "Audio file is required" });
+    }
 
-  const fileData = await uploadFile(req.file);
-  console.log(fileData);
+    // Upload
+    const fileData = await uploadFile(req.file);
 
-  const song = await songModel.create({
-    title: req.body.title,
-    artist: req.body.artist,
-    audio: fileData.url,
-    mood: req.body.mood,
-  });
+    // Save to DB
+    const song = await songModel.create({
+      title: req.body.title,
+      artist: req.body.artist,
+      audio: fileData.url,
+      mood: req.body.mood,
+    });
 
-  res.status(201).json({ message: "Song created successfully", song: song });
+    res.status(201).json({ message: "Song created successfully", song });
+  } catch (error) {
+    console.error("Error creating song:", error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
 });
 
 router.get("/songs", async (req, res) => {
-  const { mood } = req.query;
+  try {
+    const { mood } = req.query;
+    if (!mood) {
+      return res
+        .status(400)
+        .json({ message: "Mood query parameter is required" });
+    }
 
-  const songs = await songModel.find({
-    mood: mood,
-  });
-
-  res.status(200).json({ message: "Songs fetched successfully", songs: songs });
+    const songs = await songModel.find({ mood });
+    res.status(200).json({ message: "Songs fetched successfully", songs });
+  } catch (error) {
+    console.error("Error fetching songs:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 module.exports = router;
